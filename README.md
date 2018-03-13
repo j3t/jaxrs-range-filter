@@ -15,14 +15,16 @@ public class MovieEndpoint {
         long totalLength = file.length();
         
         // create response builder, add Accept-Ranges header and set media type
-        Response.ResponseBuilder responseBuilder = Response
-                .ok(file)
+        Response.ResponseBuilder responseBuilder = Response.ok()
                 .header(RangeHttpHeaders.ACCEPT_RANGES, "bytes")
                 .type(MediaType.APPLICATION_OCTET_STREAM);
 
         // if range not specified, deliver the hole file to the client
         if (range == null) {
-            return responseBuilder.header(HttpHeaders.CONTENT_LENGTH, totalLength).build();
+            return responseBuilder
+                    .entity(file)
+                    .header(HttpHeaders.CONTENT_LENGTH, totalLength)
+                    .build();
         }
 
         // else if range is satisfiable, deliver the requested part of the file to the client
