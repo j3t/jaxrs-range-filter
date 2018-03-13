@@ -1,2 +1,2 @@
-# jaxrs-range-filter
-JAX-RS extension that helps to to handle HTTP range requests.
+# jaxrs-range-helper
+JAX-RS extension that helps with HTTP range requests.
